@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bạn Là Ai Sau 18h? — CLB Tác Giả Tương Lai</title>
+<meta name="description" content="Thoát khỏi vòng lặp đi làm – về nhà, tìm lại chính mình và sống trọn vẹn mỗi ngày. Bài khảo sát dành cho bạn từ 24 tuổi: làm khảo sát, nhận giải đáp, được tư vấn." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#1e3d78;
+    --navy-deep:#152c58;
+    --orange:#f6901e;
+    --orange-deep:#e07709;
+    --yellow:#ffc94d;
+    --cream:#fff8ee;
+    --sky:#eaf1fb;
+    --pink:#ff8fa3;
+    --ink:#1b2f52;
+    --muted:#5a6b8c;
+    --white:#ffffff;
+    --shadow:0 16px 40px rgba(30,61,120,.14);
+    --hard:8px 8px 0 rgba(30,61,120,.14);
+    --radius:24px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Be Vietnam Pro',system-ui,-apple-system,sans-serif;
+    color:var(--ink);background:var(--cream);line-height:1.65;overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Baloo 2','Be Vietnam Pro',sans-serif;line-height:1.1;font-weight:800}
+  a{text-decoration:none;color:inherit}
+  .wrap{width:min(1120px,92vw);margin-inline:auto}
+  section{position:relative}
+  .doodle{position:absolute;pointer-events:none;z-index:1}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.6rem;font-family:'Baloo 2',sans-serif;
+    font-weight:700;font-size:1.05rem;padding:.95rem 2.1rem;border-radius:999px;border:none;cursor:pointer;
+    background:var(--orange);color:#fff;box-shadow:0 10px 22px rgba(246,144,30,.4);
+    transition:transform .25s ease,box-shadow .25s ease,background .2s;position:relative;
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(246,144,30,.5);background:var(--orange-deep)}
+  .btn .arrow{transition:transform .25s ease}
+  .btn:hover .arrow{transform:translateX(5px)}
+  .btn-navy{background:var(--navy);box-shadow:0 10px 22px rgba(30,61,120,.35)}
+  .btn-navy:hover{background:var(--navy-deep);box-shadow:0 16px 30px rgba(30,61,120,.45)}
+  .btn-ghost{background:transparent;color:var(--navy);border:2px solid var(--navy);box-shadow:none}
+  .btn-ghost:hover{background:var(--navy);color:#fff;box-shadow:none}
+
+  /* ---------- Nav ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:.9rem 0;transition:all .3s ease}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between}
+  nav.scrolled{background:rgba(255,248,238,.94);backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(30,61,120,.1)}
+  .brand{display:flex;align-items:center;gap:.6rem;color:var(--navy);font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.05rem}
+  .brand .dot{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--orange);color:#fff;font-size:1.2rem}
+  nav .btn{padding:.6rem 1.4rem;font-size:.95rem}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:8rem 0 5rem;overflow:hidden;background:
+    radial-gradient(circle at 88% 12%,rgba(255,201,77,.25),transparent 34%),
+    radial-gradient(circle at 6% 82%,rgba(246,144,30,.14),transparent 34%),var(--cream)}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;position:relative;z-index:2}
+  .badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--sky);border:2px solid #cfe0f7;
+    color:var(--navy);padding:.45rem 1.1rem;border-radius:999px;font-size:.85rem;font-weight:700;margin-bottom:1.4rem}
+  .badge .live{width:9px;height:9px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(246,144,30,.55)}70%{box-shadow:0 0 0 11px rgba(246,144,30,0)}100%{box-shadow:0 0 0 0 rgba(246,144,30,0)}}
+  .hero h1{font-size:clamp(2.7rem,6.2vw,4.7rem);color:var(--navy);text-transform:uppercase;letter-spacing:-1px}
+  .hero h1 .l2{display:inline-flex;align-items:center;gap:.35em;flex-wrap:wrap}
+  .hero h1 .hl{color:var(--orange);position:relative}
+  .clock-ic{width:.82em;height:.82em;flex:none;vertical-align:middle}
+  .u-scribble{display:block;width:min(320px,60%);height:14px;margin-top:-.15rem}
+  .tagline{display:inline-flex;align-items:center;gap:.6rem;background:var(--navy);color:#fff;
+    font-weight:700;font-size:.98rem;padding:.6rem 1.3rem;border-radius:14px;margin:1.5rem 0 .4rem;
+    transform:rotate(-1.2deg);box-shadow:5px 5px 0 rgba(246,144,30,.35)}
+  .tagline .hrt{color:var(--pink)}
+  .hero p.lead{font-size:1.12rem;color:var(--muted);margin:1.4rem 0 2rem;max-width:33rem}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .hero-meta{display:flex;gap:2rem;margin-top:2.4rem;flex-wrap:wrap}
+  .hero-meta .m strong{display:block;font-family:'Baloo 2',sans-serif;font-size:1.8rem;font-weight:800;color:var(--orange)}
+  .hero-meta .m span{font-size:.85rem;color:var(--muted)}
+
+  /* loop card */
+  .hero-visual{position:relative}
+  .loopcard{background:#fff;border:3px solid var(--navy);border-radius:26px;padding:2rem 1.9rem;
+    box-shadow:10px 10px 0 rgba(246,144,30,.28);position:relative;transform:rotate(1.6deg)}
+  .loopcard .lc-time{font-family:'Baloo 2',sans-serif;font-size:3.2rem;font-weight:800;color:var(--navy);line-height:1}
+  .loopcard .lc-time b{color:var(--orange)}
+  .loopcard .lc-sub{color:var(--muted);font-size:.9rem;margin:.2rem 0 1.2rem;font-weight:600}
+  .loop-item{display:flex;align-items:center;gap:.7rem;font-size:.95rem;padding:.5rem 0;color:var(--ink);font-weight:500;border-bottom:1px dashed #e3e9f4}
+  .loop-item:last-child{border-bottom:none}
+  .loop-item .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--sky);font-size:1rem}
+  .hero-mascot{position:absolute;bottom:-2.6rem;left:-2.6rem;width:132px;height:auto;z-index:3;
+    filter:drop-shadow(0 14px 20px rgba(30,61,120,.22));animation:float 6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+
+  /* ---------- Section headings ---------- */
+  .kicker{display:inline-block;font-family:'Baloo 2',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    font-size:.82rem;color:var(--orange-deep);background:rgba(246,144,30,.14);padding:.4rem 1rem;border-radius:999px;margin-bottom:1rem}
+  .sec-title{font-size:clamp(1.9rem,4.2vw,3rem);color:var(--navy)}
+  .sec-title .u{color:var(--orange)}
+
+  /* ---------- Signs ---------- */
+  .signs{padding:5.5rem 0;background:var(--sky)}
+  .signs .head{text-align:center;max-width:42rem;margin:0 auto 3rem;position:relative;z-index:2}
+  .signs .head p{color:var(--muted);font-size:1.06rem;margin-top:.8rem}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;position:relative;z-index:2}
+  .card{background:#fff;border-radius:var(--radius);padding:1.9rem 1.7rem;box-shadow:var(--shadow);
+    border:2px solid #dfe8f6;transition:transform .3s ease,box-shadow .3s ease;position:relative;overflow:hidden}
+  .card::after{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--orange),var(--yellow))}
+  .card:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(30,61,120,.18);border-color:var(--orange)}
+  .card .emoji{font-size:2.1rem;margin-bottom:.9rem;display:inline-block}
+  .card h3{font-size:1.18rem;margin-bottom:.4rem;color:var(--navy)}
+  .card p{color:var(--muted);font-size:.96rem}
+
+  /* ---------- Pillars ---------- */
+  .pillars{padding:5.5rem 0;background:var(--cream)}
+  .pillars .head{text-align:center;margin-bottom:3rem}
+  .pillar-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem}
+  .pillar{background:#fff;border:3px solid var(--navy);border-radius:22px;padding:2.2rem 2rem 2.4rem;
+    text-align:center;position:relative;box-shadow:var(--hard);transition:transform .3s ease}
+  .pillar:nth-child(1){transform:rotate(-1.2deg)}
+  .pillar:nth-child(2){transform:rotate(1.2deg)}
+  .pillar:hover{transform:translateY(-6px) rotate(0)}
+  .pillar .tape{position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);
+    width:96px;height:26px;background:rgba(246,144,30,.55);border:1px dashed rgba(255,255,255,.7)}
+  .pillar-chibi{width:150px;height:auto;display:block;margin:.4rem auto 1rem;filter:drop-shadow(0 10px 14px rgba(30,61,120,.16))}
+  .plabel{display:inline-block;font-family:'Baloo 2',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+    background:var(--orange);color:#fff;padding:.4rem 1.2rem;border-radius:999px;font-size:1rem;margin-bottom:.7rem}
+  .pillar:nth-child(2) .plabel{background:var(--navy)}
+  .pillar p{color:var(--muted);font-size:.98rem;max-width:26rem;margin:0 auto}
+
+  /* ---------- Steps ---------- */
+  .steps{padding:5.5rem 0;background:var(--sky)}
+  .steps .head{text-align:center;margin-bottom:3rem}
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:1rem;align-items:center}
+  .step{background:#fff;border-radius:var(--radius);padding:1.6rem 1.5rem 2rem;text-align:center;
+    box-shadow:var(--shadow);border:2px solid #dfe8f6;position:relative;transition:transform .3s ease}
+  .step:hover{transform:translateY(-6px);border-color:var(--orange)}
+  .step-chibi{width:120px;height:auto;display:block;margin:.2rem auto .6rem;filter:drop-shadow(0 10px 14px rgba(30,61,120,.16))}
+  .step-num{position:absolute;top:14px;left:14px;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+    font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;background:var(--orange)}
+  .step:nth-child(3) .step-num{background:var(--navy)}
+  .step:nth-child(5) .step-num{background:var(--yellow);color:var(--navy)}
+  .step h3{font-size:1.2rem;color:var(--navy);margin-bottom:.4rem}
+  .step p{color:var(--muted);font-size:.95rem}
+  .arrow-mid{display:grid;place-items:center;font-size:2rem;color:var(--orange)}
+
+  /* ---------- About ---------- */
+  .about{padding:5.5rem 0;background:var(--cream)}
+  .about .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:3.5rem;align-items:center}
+  .about-visual{background:var(--navy);border-radius:26px;padding:2.6rem;color:#fff;position:relative;
+    box-shadow:var(--hard);min-height:300px;display:flex;flex-direction:column;justify-content:center}
+  .about-visual .quote{font-family:'Baloo 2',sans-serif;font-size:1.45rem;line-height:1.45;font-weight:600}
+  .about-visual .quote .u{color:var(--yellow)}
+  .about-visual .who{margin-top:1.4rem;font-size:.9rem;color:rgba(255,255,255,.65)}
+  .about h2{margin-bottom:1rem}
+  .about p{color:var(--muted);font-size:1.04rem;margin-bottom:1rem}
+  .about ul{list-style:none;margin-top:1.2rem;display:grid;gap:.8rem}
+  .about li{display:flex;gap:.8rem;align-items:flex-start;font-size:1rem;color:var(--ink)}
+  .about li .check{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
+    background:var(--orange);color:#fff;font-weight:800;font-size:.85rem}
+
+  /* ---------- Final CTA ---------- */
+  .final{padding:5.5rem 0}
+  .final-inner{text-align:center;background:var(--navy);border-radius:32px;padding:4.4rem 2rem;color:#fff;position:relative;overflow:hidden;
+    box-shadow:0 26px 60px rgba(21,44,88,.4)}
+  .final-inner h2{font-size:clamp(2rem,5vw,3.3rem);margin-bottom:1rem}
+  .final-inner h2 .u{color:var(--yellow)}
+  .final-inner p{color:rgba(255,255,255,.82);max-width:34rem;margin:0 auto 2rem;font-size:1.08rem}
+  .final .btn{font-size:1.15rem;padding:1.1rem 2.6rem}
+  .microcopy{margin-top:1.1rem;font-size:.85rem;color:rgba(255,255,255,.6)}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:3rem 0 2.4rem;text-align:center}
+  footer .brand{justify-content:center;margin-bottom:1rem;color:#fff}
+  footer .brand .dot{background:var(--orange)}
+  footer p{font-size:.9rem;margin-top:.4rem}
+
+  /* ---------- Reveal (progressive enhancement: hidden only when JS active) ---------- */
+  .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .js .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:900px){
+    .hero{padding:6.5rem 0 4rem}
+    .hero .wrap,.about .wrap{grid-template-columns:1fr;gap:2.4rem}
+    .hero-visual{max-width:440px;margin-inline:auto;width:100%}
+    .loopcard{transform:none;width:100%}
+    .hero-mascot{left:auto;right:.4rem;bottom:-1.6rem;width:100px}
+    .cards{grid-template-columns:1fr 1fr}
+    .flow{grid-template-columns:1fr;max-width:420px;margin-inline:auto}
+    .arrow-mid{transform:rotate(90deg)}
+    .pillar-grid{grid-template-columns:1fr;gap:2.6rem;max-width:460px;margin-inline:auto}
+    .pillar:nth-child(1),.pillar:nth-child(2){transform:none}
+    .signs,.pillars,.steps,.about,.final{padding:4rem 0}
+  }
+  @media(max-width:600px){
+    nav{padding:.65rem 0}
+    .brand{font-size:.92rem;gap:.45rem;white-space:nowrap}
+    .brand .dot{width:32px;height:32px;font-size:1rem}
+    nav .btn{padding:.5rem 1rem;font-size:.82rem;white-space:nowrap}
+    .hero{padding:5.6rem 0 3rem}
+    .hero h1{font-size:2.35rem}
+    .clock-ic{width:1.05em;height:1.05em}
+    .u-scribble{width:min(240px,66%)}
+    .tagline{font-size:.9rem;padding:.55rem 1rem;transform:none}
+    .hero p.lead{font-size:1.02rem}
+    .hero-cta{flex-direction:column;align-items:stretch;width:100%}
+    .hero-cta .btn{width:100%;justify-content:center}
+    .hero-meta{gap:1.3rem;margin-top:2rem}
+    .hero-meta .m strong{font-size:1.5rem}
+    .cards{grid-template-columns:1fr}
+    .loopcard{padding:1.6rem 1.4rem}
+    .loopcard .lc-time{font-size:2.7rem}
+    .about-visual{padding:2rem 1.6rem;min-height:0}
+    .about-visual .quote{font-size:1.22rem}
+    .sec-title{font-size:1.72rem}
+    .final-inner{padding:2.8rem 1.3rem}
+    .signs,.pillars,.steps,.about,.final{padding:3.4rem 0}
+    .hero-mascot{display:none}
+  }
+  @media(max-width:380px){
+    .hero h1{font-size:2.05rem}
+    .hero-meta{gap:1rem}
+    .hero-meta .m strong{font-size:1.35rem}
+    .brand{font-size:.85rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="brand"><span class="dot">✍️</span> Tác Giả Tương Lai</div>
+    <a href="#final" class="btn">Làm khảo sát ngay</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <!-- doodles -->
+  <svg class="doodle" style="top:16%;left:4%;width:46px" viewBox="0 0 32 32"><path d="M16 28C6 20 4 11 11 9c3-.8 5 2 5 2s2-2.8 5-2c7 2 5 11-5 19z" fill="#f6901e"/></svg>
+  <svg class="doodle" style="top:10%;right:6%;width:40px" viewBox="0 0 24 24"><path d="M12 0c1 7 4 10 12 12-8 2-11 5-12 12-1-7-4-10-12-12 8-2 11-5 12-12z" fill="#ffc94d"/></svg>
+  <svg class="doodle" style="bottom:12%;right:3%;width:56px" viewBox="0 0 60 16"><path d="M2 10c6-8 12 8 18 0s12 8 18 0 12 6 18 2" fill="none" stroke="#1e3d78" stroke-width="3" stroke-linecap="round" opacity=".5"/></svg>
+  <div class="wrap">
+    <div>
+      <span class="badge"><span class="live"></span> Khảo sát cộng đồng · Dành cho bạn 24+</span>
+      <h1>
+        Bạn là ai<br>
+        <span class="l2">sau
+          <svg class="clock-ic" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#fff" stroke="#1e3d78" stroke-width="4"/><line x1="24" y1="24" x2="24" y2="11" stroke="#f6901e" stroke-width="4" stroke-linecap="round"/><line x1="24" y1="24" x2="24" y2="35" stroke="#f6901e" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="24" r="2.6" fill="#1e3d78"/></svg>
+          <span class="hl">18h?</span>
+        </span>
+      </h1>
+      <svg class="u-scribble" viewBox="0 0 320 14" preserveAspectRatio="none"><path d="M4 9c60-8 250-8 312-2" fill="none" stroke="#f6901e" stroke-width="5" stroke-linecap="round"/></svg>
+      <div class="tagline"><span class="hrt">♥</span> Thoát khỏi vòng lặp – Tìm lại chính mình · Sống trọn vẹn mỗi ngày!</div>
+      <p class="lead">
+        Sáng thức dậy, đi làm, tan sở, về nhà, ăn qua loa, lướt điện thoại, rồi ngủ…
+        Ngày mai lại y hệt. Bạn đang <b>sống</b> — hay chỉ đang <b>tồn tại</b>?
+      </p>
+      <div class="hero-cta">
+        <a href="#final" class="btn">Bắt đầu khảo sát <span class="arrow">→</span></a>
+        <a href="#signs" class="btn btn-ghost">Xem dấu hiệu</a>
+      </div>
+      <div class="hero-meta">
+        <div class="m"><strong>3 phút</strong><span>Điền cực nhanh</span></div>
+        <div class="m"><strong>1 quà</strong><span>Giải đáp riêng cho bạn</span></div>
+        <div class="m"><strong>100%</strong><span>Ẩn danh &amp; bảo mật</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="loopcard">
+        <div class="lc-time">18:<b>00</b></div>
+        <div class="lc-sub">Guồng quay mỗi ngày của bạn</div>
+        <div class="loop-item"><span class="ic">⏰</span> Thức dậy trong mệt mỏi</div>
+        <div class="loop-item"><span class="ic">💼</span> Đi làm — deadline nối deadline</div>
+        <div class="loop-item"><span class="ic">🏠</span> Về nhà, ăn uống qua loa</div>
+        <div class="loop-item"><span class="ic">📱</span> Lướt điện thoại vô định</div>
+        <div class="loop-item"><span class="ic">🔁</span> Ngủ… rồi lặp lại</div>
+      </div>
+      <!-- mascot: chibi thư giãn buổi tối -->
+      <svg class="hero-mascot" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nhân vật chibi thư giãn buổi tối">
+        <path d="M186 46 a32 32 0 1 0 8 62 a25 25 0 1 1 -8 -62z" fill="#ffc94d"/>
+        <path d="M36 40 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3z" fill="#ffc94d"/>
+        <circle cx="66" cy="26" r="3.5" fill="#f6901e"/>
+        <path d="M190 152 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2z" fill="#f6901e"/>
+        <ellipse cx="110" cy="204" rx="60" ry="10" fill="#1e3d78" opacity=".18"/>
+        <path d="M66 188 q10 -26 44 -26 q34 0 44 26 q-44 12 -88 0z" fill="#152c58"/>
+        <path d="M78 150 q32 -22 64 0 l4 30 q-36 12 -72 0z" fill="#f6901e"/>
+        <path d="M84 158 q-4 20 20 24" stroke="#ffe0c2" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <path d="M136 158 q4 20 -20 24" stroke="#ffe0c2" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <rect x="96" y="168" width="28" height="24" rx="6" fill="#fff"/>
+        <path d="M124 172 q11 0 11 9 q0 9 -11 9" stroke="#fff" stroke-width="4" fill="none"/>
+        <path d="M104 164 q-2 -8 2 -12 M114 164 q-2 -8 2 -12" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".75"/>
+        <circle cx="110" cy="96" r="48" fill="#ffe0c2"/>
+        <path d="M62 98 q-2 -54 48 -54 q50 0 48 54 q-10 -26 -32 -24 q6 9 -3 14 q-10 -17 -30 -11 q-22 6 -31 21z" fill="#3a2b4d"/>
+        <path d="M88 98 q7 -8 14 0" stroke="#3a2b4d" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+        <path d="M118 98 q7 -8 14 0" stroke="#3a2b4d" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+        <circle cx="82" cy="110" r="7" fill="#ff9db0" opacity=".5"/>
+        <circle cx="138" cy="110" r="7" fill="#ff9db0" opacity=".5"/>
+        <path d="M101 112 q9 9 18 0" stroke="#3a2b4d" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- SIGNS -->
+<section class="signs" id="signs">
+  <svg class="doodle" style="top:8%;left:5%;width:38px" viewBox="0 0 24 24"><path d="M12 0c1 7 4 10 12 12-8 2-11 5-12 12-1-7-4-10-12-12 8-2 11-5 12-12z" fill="#f6901e" opacity=".5"/></svg>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Có phải là bạn?</span>
+      <h2 class="sec-title">Dấu hiệu bạn đang bị vòng lặp <span class="u">"nuốt chửng"</span></h2>
+      <p>Nếu bạn gật đầu với 2–3 điều dưới đây, có lẽ đã đến lúc dừng lại và lắng nghe chính mình.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal"><span class="emoji">😮‍💨</span><h3>Nhàm chán triền miên</h3><p>Mỗi ngày trôi qua giống hệt nhau, chẳng còn gì để mong chờ khi thức dậy.</p></div>
+      <div class="card reveal"><span class="emoji">🔋</span><h3>Kiệt sức &amp; cạn năng lượng</h3><p>Cơ thể mệt mỏi, tinh thần trống rỗng dù chưa làm gì "to tát".</p></div>
+      <div class="card reveal"><span class="emoji">📵</span><h3>Lướt điện thoại vô thức</h3><p>Buổi tối trôi qua trong tay là màn hình, mà chẳng thấy vui hơn.</p></div>
+      <div class="card reveal"><span class="emoji">🎯</span><h3>Mất kết nối với mục tiêu</h3><p>Không nhớ lần cuối làm điều gì đó chỉ vì mình thực sự thích là khi nào.</p></div>
+      <div class="card reveal"><span class="emoji">🌗</span><h3>"Sống" chỉ sau giờ làm</h3><p>Cảm giác bản thân thật sự chỉ tồn tại trong vài giờ ngắn ngủi buổi tối.</p></div>
+      <div class="card reveal"><span class="emoji">💭</span><h3>Tự hỏi "mình đang làm gì?"</h3><p>Câu hỏi lặp đi lặp lại nhưng chưa bao giờ có thời gian để trả lời.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars">
+  <svg class="doodle" style="top:12%;right:6%;width:50px" viewBox="0 0 32 32"><path d="M16 28C6 20 4 11 11 9c3-.8 5 2 5 2s2-2.8 5-2c7 2 5 11-5 19z" fill="#ff8fa3"/></svg>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Giá trị chương trình mang lại</span>
+      <h2 class="sec-title">Cùng bạn <span class="u">phát triển</span> &amp; <span class="u">kết nối</span></h2>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar reveal">
+        <span class="tape"></span>
+        <svg class="pillar-chibi" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chibi phát triển bản thân">
+          <ellipse cx="100" cy="188" rx="52" ry="8" fill="#1e3d78" opacity=".1"/>
+          <path d="M150 40 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3z" fill="#ffc94d"/>
+          <rect x="80" y="150" width="14" height="30" rx="7" fill="#152c58"/>
+          <rect x="106" y="150" width="14" height="30" rx="7" fill="#152c58"/>
+          <ellipse cx="84" cy="180" rx="12" ry="6" fill="#0f1f3d"/>
+          <ellipse cx="116" cy="180" rx="12" ry="6" fill="#0f1f3d"/>
+          <path d="M66 112 q34 -20 68 0 l7 46 q-41 15 -82 0z" fill="#f6901e"/>
+          <path d="M132 120 q26 -6 24 -40" stroke="#ffe0c2" stroke-width="13" fill="none" stroke-linecap="round"/>
+          <path d="M156 74 l4 9 l9 4 l-9 4 l-4 9 l-4 -9 l-9 -4 l9 -4z" fill="#ffc94d"/>
+          <path d="M68 120 q-16 12 -12 34" stroke="#ffe0c2" stroke-width="13" fill="none" stroke-linecap="round"/>
+          <path d="M40 150 q6 -18 20 -14 q-2 8 -8 10 q10 0 12 8 q-14 6 -24 -4z" fill="#4caf50"/>
+          <circle cx="100" cy="66" r="44" fill="#ffe0c2"/>
+          <path d="M57 68 q-2 -48 43 -48 q45 0 43 48 q-9 -22 -28 -21 q5 8 -3 12 q-9 -14 -26 -9 q-21 5 -29 18z" fill="#3a2b4d"/>
+          <path d="M80 68 q7 -8 14 0" stroke="#3a2b4d" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <path d="M106 68 q7 -8 14 0" stroke="#3a2b4d" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <circle cx="74" cy="80" r="6" fill="#ff9db0" opacity=".5"/>
+          <circle cx="126" cy="80" r="6" fill="#ff9db0" opacity=".5"/>
+          <path d="M92 82 q8 9 16 0" stroke="#3a2b4d" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="plabel">Phát triển bản thân</span>
+        <p>Nhận ra điều đang kìm hãm mình, tìm lại động lực và từng bước xây dựng phiên bản tốt hơn mỗi ngày.</p>
+      </div>
+      <div class="pillar reveal">
+        <span class="tape"></span>
+        <svg class="pillar-chibi" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chibi kết nối cộng đồng">
+          <ellipse cx="100" cy="188" rx="58" ry="8" fill="#1e3d78" opacity=".1"/>
+          <path d="M100 40 c-8 -12 -26 -4 -20 10 c4 9 20 18 20 18 s16 -9 20 -18 c6 -14 -12 -22 -20 -10z" fill="#ff8fa3"/>
+          <!-- left chibi -->
+          <rect x="54" y="150" width="12" height="28" rx="6" fill="#152c58"/>
+          <rect x="74" y="150" width="12" height="28" rx="6" fill="#152c58"/>
+          <path d="M46 118 q24 -16 48 0 l5 38 q-29 12 -58 0z" fill="#f6901e"/>
+          <path d="M88 124 q10 6 8 22" stroke="#ffe0c2" stroke-width="11" fill="none" stroke-linecap="round"/>
+          <circle cx="70" cy="86" r="32" fill="#ffe0c2"/>
+          <path d="M39 88 q-2 -34 31 -34 q33 0 31 34 q-7 -16 -20 -15 q4 6 -2 9 q-7 -10 -19 -6 q-15 4 -21 12z" fill="#3a2b4d"/>
+          <path d="M56 88 q5 -6 10 0" stroke="#3a2b4d" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M74 88 q5 -6 10 0" stroke="#3a2b4d" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M64 96 q6 6 12 0" stroke="#3a2b4d" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <!-- right chibi -->
+          <rect x="114" y="150" width="12" height="28" rx="6" fill="#0f1f3d"/>
+          <rect x="134" y="150" width="12" height="28" rx="6" fill="#0f1f3d"/>
+          <path d="M106 118 q24 -16 48 0 l5 38 q-29 12 -58 0z" fill="#1e3d78"/>
+          <path d="M112 124 q-10 6 -8 22" stroke="#ffe0c2" stroke-width="11" fill="none" stroke-linecap="round"/>
+          <circle cx="130" cy="86" r="32" fill="#ffe0c2"/>
+          <path d="M99 88 q-2 -34 31 -34 q33 0 31 34 q-7 -16 -20 -15 q4 6 -2 9 q-7 -10 -19 -6 q-15 4 -21 12z" fill="#4a3355"/>
+          <path d="M116 88 q5 -6 10 0" stroke="#3a2b4d" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M134 88 q5 -6 10 0" stroke="#3a2b4d" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M124 96 q6 6 12 0" stroke="#3a2b4d" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <circle cx="52" cy="96" r="5" fill="#ff9db0" opacity=".5"/>
+          <circle cx="148" cy="96" r="5" fill="#ff9db0" opacity=".5"/>
+        </svg>
+        <span class="plabel">Kết nối</span>
+        <p>Gặp gỡ những người trẻ cùng tần số, sẻ chia câu chuyện thật và không còn cảm thấy đơn độc.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Cách tham gia</span>
+      <h2 class="sec-title">Chỉ <span class="u">3 bước</span> đơn giản</h2>
+    </div>
+    <div class="flow">
+      <div class="step reveal">
+        <span class="step-num">1</span>
+        <svg class="step-chibi" viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chibi làm khảo sát">
+          <ellipse cx="100" cy="197" rx="50" ry="8" fill="#1e3d78" opacity=".1"/>
+          <rect x="82" y="160" width="14" height="32" rx="7" fill="#152c58"/>
+          <rect x="104" y="160" width="14" height="32" rx="7" fill="#152c58"/>
+          <ellipse cx="86" cy="192" rx="12" ry="6" fill="#0f1f3d"/>
+          <ellipse cx="114" cy="192" rx="12" ry="6" fill="#0f1f3d"/>
+          <path d="M66 122 q34 -20 68 0 l7 46 q-41 15 -82 0z" fill="#f6901e"/>
+          <path d="M72 130 q-18 14 -12 40" stroke="#ffe0c2" stroke-width="13" fill="none" stroke-linecap="round"/>
+          <g transform="rotate(-7 70 172)">
+            <rect x="46" y="146" width="46" height="56" rx="6" fill="#fff" stroke="#1e3d78" stroke-width="3"/>
+            <rect x="60" y="140" width="18" height="9" rx="3" fill="#1e3d78"/>
+            <path d="M54 162 l5 5 l9 -11" stroke="#f6901e" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="72" y1="163" x2="84" y2="163" stroke="#d7e2f3" stroke-width="3" stroke-linecap="round"/>
+            <path d="M54 178 l5 5 l9 -11" stroke="#f6901e" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="72" y1="179" x2="84" y2="179" stroke="#d7e2f3" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <path d="M128 130 q20 10 18 34" stroke="#ffe0c2" stroke-width="13" fill="none" stroke-linecap="round"/>
+          <g transform="rotate(35 150 150)">
+            <rect x="144" y="120" width="9" height="40" rx="2" fill="#ffc94d"/>
+            <rect x="144" y="120" width="9" height="7" fill="#ff9db0"/>
+            <path d="M144 160 l4.5 10 l4.5 -10z" fill="#ffe0c2"/>
+            <path d="M146.5 166 l2 5 l2 -5z" fill="#3a2b4d"/>
+          </g>
+          <circle cx="100" cy="72" r="45" fill="#ffe0c2"/>
+          <path d="M55 74 q-2 -50 45 -50 q47 0 45 50 q-9 -23 -27 -22 q4 8 -3 12 q-9 -15 -27 -9 q-22 5 -33 19z" fill="#4a3355"/>
+          <ellipse cx="85" cy="74" rx="5.5" ry="6.5" fill="#3a2b4d"/>
+          <ellipse cx="115" cy="74" rx="5.5" ry="6.5" fill="#3a2b4d"/>
+          <circle cx="87" cy="71" r="2" fill="#fff"/>
+          <circle cx="117" cy="71" r="2" fill="#fff"/>
+          <circle cx="74" cy="86" r="6" fill="#ff9db0" opacity=".5"/>
+          <circle cx="126" cy="86" r="6" fill="#ff9db0" opacity=".5"/>
+          <path d="M93 88 q7 7 14 0" stroke="#3a2b4d" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h3>Làm bài khảo sát</h3><p>Trả lời vài câu hỏi ngắn, thành thật với chính mình. Chỉ mất khoảng 3 phút.</p>
+      </div>
+      <div class="arrow-mid reveal">➜</div>
+      <div class="step reveal">
+        <span class="step-num">2</span>
+        <svg class="step-chibi" viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chibi nhận quà giải đáp">
+          <ellipse cx="100" cy="197" rx="50" ry="8" fill="#1e3d78" opacity=".1"/>
+          <rect x="82" y="162" width="14" height="30" rx="7" fill="#152c58"/>
+          <rect x="104" y="162" width="14" height="30" rx="7" fill="#152c58"/>
+          <ellipse cx="86" cy="192" rx="12" ry="6" fill="#0f1f3d"/>
+          <ellipse cx="114" cy="192" rx="12" ry="6" fill="#0f1f3d"/>
+          <path d="M66 122 q34 -20 68 0 l7 48 q-41 15 -82 0z" fill="#1e3d78"/>
+          <rect x="70" y="140" width="60" height="46" rx="6" fill="#ffc94d"/>
+          <rect x="70" y="140" width="60" height="14" rx="6" fill="#f6a92e"/>
+          <rect x="94" y="140" width="12" height="46" fill="#f6901e"/>
+          <path d="M100 141 q-16 -14 -22 -2 q-2 8 22 2z" fill="#f6901e"/>
+          <path d="M100 141 q16 -14 22 -2 q2 8 -22 2z" fill="#f6901e"/>
+          <circle cx="100" cy="140" r="5" fill="#ffb04a"/>
+          <path d="M70 132 q-6 26 22 30" stroke="#ffe0c2" stroke-width="13" fill="none" stroke-linecap="round"/>
+          <path d="M130 132 q6 26 -22 30" stroke="#ffe0c2" stroke-width="13" fill="none" stroke-linecap="round"/>
+          <circle cx="100" cy="72" r="45" fill="#ffe0c2"/>
+          <path d="M55 72 q-2 -50 45 -50 q47 0 45 50 q-10 -24 -30 -22 q6 8 -2 13 q-10 -16 -28 -10 q-20 6 -30 19z" fill="#3a2b4d"/>
+          <path d="M79 74 q6 -7 12 0" stroke="#3a2b4d" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <path d="M109 74 q6 -7 12 0" stroke="#3a2b4d" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <circle cx="73" cy="86" r="6" fill="#ff9db0" opacity=".5"/>
+          <circle cx="127" cy="86" r="6" fill="#ff9db0" opacity=".5"/>
+          <path d="M92 88 q8 9 16 0" stroke="#3a2b4d" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M152 58 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3z" fill="#ffc94d"/>
+          <circle cx="46" cy="66" r="3.5" fill="#f6901e"/>
+        </svg>
+        <h3>Nhận giải đáp</h3><p>Nhận món quà giải đáp từ CLB — góc nhìn &amp; gợi ý riêng để bạn tự chữa lành.</p>
+      </div>
+      <div class="arrow-mid reveal">➜</div>
+      <div class="step reveal">
+        <span class="step-num">3</span>
+        <svg class="step-chibi" viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chibi được tư vấn">
+          <ellipse cx="100" cy="197" rx="50" ry="8" fill="#1e3d78" opacity=".1"/>
+          <rect x="82" y="160" width="14" height="32" rx="7" fill="#152c58"/>
+          <rect x="104" y="160" width="14" height="32" rx="7" fill="#152c58"/>
+          <ellipse cx="86" cy="192" rx="12" ry="6" fill="#0f1f3d"/>
+          <ellipse cx="114" cy="192" rx="12" ry="6" fill="#0f1f3d"/>
+          <path d="M66 122 q34 -20 68 0 l7 46 q-41 15 -82 0z" fill="#ffc94d"/>
+          <path d="M72 130 q-16 12 -12 34" stroke="#ffe0c2" stroke-width="13" fill="none" stroke-linecap="round"/>
+          <path d="M128 130 q16 10 16 30" stroke="#ffe0c2" stroke-width="13" fill="none" stroke-linecap="round"/>
+          <circle cx="146" cy="160" r="8" fill="#ffe0c2"/>
+          <circle cx="100" cy="72" r="45" fill="#ffe0c2"/>
+          <path d="M55 74 q-2 -50 45 -50 q47 0 45 50 q-10 -22 -30 -21 q5 8 -3 12 q-9 -15 -27 -10 q-20 6 -30 19z" fill="#3a2b4d"/>
+          <path d="M62 72 q0 -40 38 -40 q38 0 38 40" stroke="#f6901e" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <rect x="55" y="66" width="14" height="22" rx="6" fill="#f6901e"/>
+          <rect x="131" y="66" width="14" height="22" rx="6" fill="#f6901e"/>
+          <path d="M62 86 q-6 12 6 20" stroke="#f6901e" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="70" cy="104" r="4" fill="#f6901e"/>
+          <ellipse cx="85" cy="74" rx="5.5" ry="6.5" fill="#3a2b4d"/>
+          <ellipse cx="115" cy="74" rx="5.5" ry="6.5" fill="#3a2b4d"/>
+          <circle cx="87" cy="71" r="2" fill="#fff"/>
+          <circle cx="117" cy="71" r="2" fill="#fff"/>
+          <circle cx="76" cy="86" r="6" fill="#ff9db0" opacity=".5"/>
+          <circle cx="124" cy="86" r="6" fill="#ff9db0" opacity=".5"/>
+          <path d="M92 87 q8 8 16 0" stroke="#3a2b4d" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M150 42 q19 0 19 15 q0 15 -19 15 q-4 0 -8 -1 l-9 6 l2 -8 q-4 -5 -4 -12 q0 -15 19 -15z" fill="#fff" stroke="#1e3d78" stroke-width="2.5"/>
+          <path d="M150 52 q-4 -5 -8 -1 q-3 4 8 11 q11 -7 8 -11 q-4 -4 -8 1z" fill="#f6901e"/>
+        </svg>
+        <h3>Được tư vấn</h3><p>Nhận buổi tư vấn cùng CLB để tìm lại sự cân bằng và hướng đi cho riêng bạn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="wrap">
+    <div class="about-visual reveal">
+      <div class="quote">"Bạn <span class="u">không đơn độc</span>. Và bạn hoàn toàn có thể thoát ra khỏi guồng quay ấy."</div>
+      <div class="who">— CLB Tác Giả Tương Lai (Future Authors Club)</div>
+    </div>
+    <div class="reveal">
+      <span class="kicker">Về chúng tôi</span>
+      <h2 class="sec-title">CLB <span class="u">Tác Giả Tương Lai</span></h2>
+      <p>Chúng tôi là cộng đồng những người trẻ tin rằng ai cũng có một câu chuyện đáng được viết ra. Dự án sách lần này dành cho các bạn <b>từ 24 tuổi trở lên</b> — độ tuổi bắt đầu đối diện với áp lực công việc, sự đơn điệu và câu hỏi về ý nghĩa cuộc sống.</p>
+      <ul>
+        <li><span class="check">✓</span> Hiểu rõ hơn những vấn đề người trẻ đang đối mặt sau giờ làm.</li>
+        <li><span class="check">✓</span> Cùng nhau tìm lại sự cân bằng và chữa lành cho bản thân.</li>
+        <li><span class="check">✓</span> Biến trải nghiệm cá nhân thành một cuốn sách thật sự có ích.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="final">
+  <div class="wrap">
+    <div class="final-inner reveal">
+      <svg class="doodle" style="top:16%;left:8%;width:44px" viewBox="0 0 24 24"><path d="M12 0c1 7 4 10 12 12-8 2-11 5-12 12-1-7-4-10-12-12 8-2 11-5 12-12z" fill="#ffc94d" opacity=".8"/></svg>
+      <svg class="doodle" style="bottom:16%;right:9%;width:40px" viewBox="0 0 32 32"><path d="M16 28C6 20 4 11 11 9c3-.8 5 2 5 2s2-2.8 5-2c7 2 5 11-5 19z" fill="#ff8fa3"/></svg>
+      <h2>Dành 3 phút để <span class="u">gặp lại chính mình</span></h2>
+      <p>Làm bài khảo sát ngắn để nhận diện tình trạng của bạn — và nhận món quà giải đáp từ CLB. Hoàn toàn miễn phí &amp; ẩn danh.</p>
+      <a href="https://docs.google.com/forms/d/1gZE9ihS18x9Pp1s0owzwCEQzUHG59DKupsebt8ZD0Og/viewform" target="_blank" rel="noopener" class="btn">
+        Làm khảo sát ngay <span class="arrow">→</span>
+      </a>
+      <div class="microcopy">🔒 Câu trả lời của bạn được giữ kín và chỉ dùng cho mục đích viết sách.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="dot">✍️</span> Tác Giả Tương Lai</div>
+    <p>Future Authors Club — Viết nên câu chuyện của thế hệ.</p>
+    <p style="opacity:.55;margin-top:.8rem">© 2026 CLB Tác Giả Tương Lai. Bài khảo sát "Bạn là ai sau 18h?".</p>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), (i % 4) * 90); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
